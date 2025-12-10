@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMOR D'PET</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header> 
+        <div id="container"> 
+
+          <h1>AMOR D'PET</h1>
+          <div class="link-c">
+            <a href="index.html" class="lic">&#128206; Inicio</a>
+            <a href="#" class="lic">&#128206; Sobre</a>
+            <a href="index.html#catg" class="lic">&#128206; Top Categorias</a>
+            <a href="#" class="lic">&#128206; Contato</a>
+          </div>
+
+        </div>
+    </header>
+
+    <div id="animais">
+        <h2>Categorias</h2>
+        <div class="animais-items" id="categoria-pet"> <!--imagens do lado de cada especificacao-->
+        </div>
+    </div>
+
+    <div id="animais-product">
+
+
+    </div>
+
+    <footer>
+        <h4>“Este projeto é apenas ilustrativo. Esta página foi desenvolvida como atividade da Disciplina Programação para Web II."</h4>
+      </footer>
+
+      <script>
+        const products = JSON.parse(window.localStorage.getItem('products'))
+        const categories = JSON.parse(window.localStorage.getItem('categories'))
+        const pets = JSON.parse(window.localStorage.getItem('pets'))
+
+
+        pets.map( pet => {
+        document.getElementById('categoria-pet').innerHTML += `
+        <div id="item"> 
+                <img src="${pet.imagem_url}" width="140px" alt="">
+                <a href="#pet${pet.id}">${pet.nome}</a>
+            </div>
+
+        `
+        })
+
+        pets.map( pet => {
+        document.getElementById('animais-product').innerHTML += `
+        <div id="prod">
+        <h2 id="pet${pet.id}">${pet.nome}</h2>
+        <div class="prod-list">
+           ${
+            products.filter(p => p.pet_id == pet.id).map(p => {
+                return` <div class="prod"><img src="${p.imagem_url}" width="350px" alt="" class="pro1">${p.nome}</div> 
+                
+                `
+            }).join('')  
+            }
+        </div>
+    </div>
+
+
+        `
+        })
+
+
+
+
+      </script>
+</body>
+</html>
